@@ -28,11 +28,16 @@ function Chart() {
         "loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data: data?.map((price) => parseInt(price.close)) ?? [],
+              data:
+                data?.map(function (data) {
+                  return {
+                    x: data.time_close * 1000,
+                    y: [data.open, data.high, data.low, data.close],
+                  };
+                }) ?? [],
             },
           ]}
           options={{
@@ -59,6 +64,7 @@ function Chart() {
               axisBorder: {show: false},
               axisTicks: {show: false},
               labels: {show: false},
+              type: "datetime",
             },
           }}
         />

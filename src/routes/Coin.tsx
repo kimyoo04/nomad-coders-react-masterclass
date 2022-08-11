@@ -29,7 +29,7 @@ const Container = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 const Overview = styled.div`
@@ -73,6 +73,15 @@ const Tab = styled.span<{isActive: boolean}>`
     padding: 7px 0px;
     display: block;
   }
+`;
+
+const Btn = styled.button`
+  background-color: yellow;
+  border-radius: 6px;
+`;
+
+const BtnText = styled.text`
+  font-size: 18px;
 `;
 
 interface RouteState {
@@ -150,12 +159,20 @@ function Coin() {
     () => fetchCoinTickers(coinId)
   );
   const loading = infoLoading || tickersLoading;
+
+  const goToCoins = () => {};
+
   return (
     <Container>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
+        <Btn>
+          <Link to={`/`}>
+            <BtnText>Previous Page</BtnText>
+          </Link>
+        </Btn>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
