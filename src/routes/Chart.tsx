@@ -14,10 +14,14 @@ interface IHistorical {
   market_cap: number;
 }
 
+interface IRouterProps {
+  isDark: boolean;
+}
+
 interface ChartProps {
   coinId: string;
 }
-function Chart() {
+function Chart({isDark}: IRouterProps) {
   const {coinId} = useOutletContext<ChartProps>();
   const {isLoading, data} = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
@@ -42,7 +46,7 @@ function Chart() {
           ]}
           options={{
             theme: {
-              mode: "dark",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 300,
@@ -57,14 +61,13 @@ function Chart() {
               curve: "smooth",
               width: 4,
             },
-            yaxis: {
-              show: false,
-            },
             xaxis: {
-              axisBorder: {show: false},
-              axisTicks: {show: false},
-              labels: {show: false},
               type: "datetime",
+            },
+            yaxis: {
+              tooltip: {
+                enabled: true,
+              },
             },
           }}
         />

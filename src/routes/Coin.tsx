@@ -1,17 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
-import {
-  useLocation,
-  useParams,
-  useMatch,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import {useLocation, useParams, useMatch, Outlet} from "react-router-dom";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 import {fetchCoinInfo, fetchCoinTickers} from "../api";
-import Chart from "./Chart";
-import Price from "./Price";
+import darkIcon from "../img/dark_mode.svg";
+import lightIcon from "../img/light_mode.svg";
 
 const Title = styled.h1`
   font-size: 48px;
@@ -35,7 +28,7 @@ const Header = styled.header`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.areaColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -65,7 +58,7 @@ const Tab = styled.span<{isActive: boolean}>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.areaColor};
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
@@ -75,14 +68,32 @@ const Tab = styled.span<{isActive: boolean}>`
   }
 `;
 
-const Btn = styled.button`
-  background-color: yellow;
+export const Btn = styled.button`
+  background-color: whitesmoke;
   border-radius: 6px;
 `;
 
-const BtnText = styled.text`
-  font-size: 18px;
+export const BtnText = styled.span`
+  font-size: 16px;
 `;
+
+export const DarkBtn = styled.div`
+  background-image: url(${darkIcon});
+  background-repeat: no-repeat;
+  width: 44px;
+  height: 20px;
+`;
+export const LightBtn = styled.div`
+  background-image: url(${lightIcon});
+  background-repeat: no-repeat;
+  width: 44px;
+  height: 20px;
+`;
+
+interface IRouterProps {
+  toggleDark: () => void;
+  isDark: boolean;
+}
 
 interface RouteState {
   state: {
@@ -145,7 +156,7 @@ interface PriceData {
   };
 }
 
-function Coin() {
+function Coin({isDark, toggleDark}: IRouterProps) {
   const {coinId} = useParams() as {coinId: string};
   const {state} = useLocation() as RouteState;
   const priceMatch = useMatch("/:coinId/price");
@@ -160,8 +171,6 @@ function Coin() {
   );
   const loading = infoLoading || tickersLoading;
 
-  const goToCoins = () => {};
-
   return (
     <Container>
       <Header>
@@ -170,9 +179,12 @@ function Coin() {
         </Title>
         <Btn>
           <Link to={`/`}>
-            <BtnText>Previous Page</BtnText>
+            <BtnText>Go Back</BtnText>
           </Link>
         </Btn>
+        <div onClick={toggleDark}>
+          <BtnText>{isDark ? <DarkBtn /> : <LightBtn />}</BtnText>
+        </div>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
