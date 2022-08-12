@@ -14,16 +14,16 @@ function Router({isDark, toggleDark}: IRouterProps) {
     <BrowserRouter>
       <Routes>
         <Route
+          path="/"
+          element={<Coins isDark={isDark} toggleDark={toggleDark} />}
+        />
+        <Route
           path="/:coinId"
           element={<Coin isDark={isDark} toggleDark={toggleDark} />}
         >
           <Route path="Chart" element={<Chart isDark={isDark} />} />
           <Route path="Price" element={<Price isDark={isDark} />} />
         </Route>
-        <Route
-          path="/"
-          element={<Coins isDark={isDark} toggleDark={toggleDark} />}
-        />
       </Routes>
     </BrowserRouter>
   );
