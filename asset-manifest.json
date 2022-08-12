@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/nomad-coders-react-masterclass/static/js/main.3d26b6a3.js",
+    "static/media/dark_mode.svg": "/nomad-coders-react-masterclass/static/media/dark_mode.c4f4109a08bbe209010c82182331c412.svg",
+    "static/media/light_mode.svg": "/nomad-coders-react-masterclass/static/media/light_mode.9258870609fc6fc282808639c2622838.svg",
+    "index.html": "/nomad-coders-react-masterclass/index.html",
+    "main.3d26b6a3.js.map": "/nomad-coders-react-masterclass/static/js/main.3d26b6a3.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.3d26b6a3.js"
+  ]
+}
