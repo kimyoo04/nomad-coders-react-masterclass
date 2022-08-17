@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {HashRouter, Routes, Route} from "react-router-dom";
 import Chart from "./routes/Chart";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
@@ -11,7 +11,7 @@ interface IRouterProps {
 
 function Router({isDark, toggleDark}: IRouterProps) {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -25,7 +25,7 @@ function Router({isDark, toggleDark}: IRouterProps) {
           <Route path="Price" element={<Price isDark={isDark} />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 export default Router;
