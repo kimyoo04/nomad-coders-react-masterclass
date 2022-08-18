@@ -4,6 +4,7 @@ import App from "./App";
 import {ThemeProvider} from "styled-components";
 import {darkTheme} from "./theme";
 import {RecoilRoot} from "recoil";
+import "./styles.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
